@@ -4,8 +4,8 @@
 
 - 支持内嵌 mpvue 配置
 - 支持黑白名单配置
-- 提供 watch, build2, mpvue 3种模式
-- mpvue 的编译可插拔
+- 提供 watch, build2, mpvue 3种模式
+- mpvue 的编译可插拔
 
 ## 命令
 
@@ -21,7 +21,7 @@ gulp build --mpvue 生产模式 （编译 mpvue）
 gulp mpvue 编译 mpvue，输出到 distDll 文件夹下（作为动态链接库使用）
 ```
 
-## 目录
+## 目录 example
 
 ```js
 ├── gulpfile.js           ---------gulp入口
@@ -34,5 +34,5 @@ gulp mpvue 编译 mpvue，输出到 distDll 文件夹下（作为动态链接库
 │   ├── mpvue.js          ---------mpvue模式
 │   ├── utils.js          ---------工具类
 │   └── watch.js          ---------watch模式
-└── src
+└── src                   ---------小程序源文件
 ```
