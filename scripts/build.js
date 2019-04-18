@@ -125,8 +125,6 @@ const run = () => {
     }
   });
 
-  gulp.task('packagesOpt', shell.task('npm run perf'));
-
   gulp.task('cpSrcResource', ['wxmlResource', 'jsonResource', 'wxssResource', 'lessResource', 'otherResource']);
 
   gulp.task('cpResource', ['cpSrcResource']);
@@ -137,7 +135,7 @@ const run = () => {
 
   gulp.task('build', (cb) => {
     start = new Date();
-    runsequence('clean', ['start', 'cpMpvueResource'], ['packagesOpt'], () => {
+    runsequence('clean', ['start', 'cpMpvueResource'], () => {
       cb();
       log('Done ' + chalk.yellow('total ') + chalk.magenta(durationTime()));
       process.exit();
