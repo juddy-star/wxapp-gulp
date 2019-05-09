@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const yargs = require('yargs');
-const cached = require('gulp-cached');
 const { blackList } = require('./legalList');
 const log = require('fancy-log');
 const chalk = require('chalk');
@@ -68,11 +67,10 @@ const reExtname = (path, extname) => {
  * @param {*} type
  * @param {*} path
  */
-const deleteCached = (type, path) => {
+const deleteCached = (type, path, cached) => {
   try {
     if (type === 'deleted') {                   // 如果一个文件被删除了，则将其忘记
       delete cached.caches.originJs[path];       // gulp-cached 的删除 api
-      delete cached.caches.originLess[path];       // gulp-cached 的删除 api
       // remember.forget('originJs', path);         // gulp-remember 的删除 api
     }
   } catch (err) {

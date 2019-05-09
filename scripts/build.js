@@ -70,19 +70,13 @@ const run = () => {
       .pipe(gulp.dest('dist'));
   });
 
-  gulp.task('lessResource', () => {
+  gulp.task('lessResource', ['wxssResource'], () => {
     return gulp.src(generateSrc('src/**/*.less'))
       .pipe(plumber({
         errorHandler: notify.onError('Error: <%= error.message %>')
       }))
-      // .pipe(rename((path) => { reExtname(path, '.less'); }))
       .pipe(less())
-      // .pipe(rename((path) => { reExtname(path, '.css'); }))
-      // .pipe(autoprefixer())
-      // .pipe(cssmin())
-      .pipe(rename((path) => {
-        reExtname(path, '.wxss');
-      }))
+      .pipe(rename((path) => { reExtname(path, '.wxss'); }))
       .pipe(gulp.dest('dist'));
   });
 
@@ -125,7 +119,7 @@ const run = () => {
     }
   });
 
-  gulp.task('cpSrcResource', ['wxmlResource', 'jsonResource', 'wxssResource', 'lessResource', 'otherResource']);
+  gulp.task('cpSrcResource', ['wxmlResource', 'jsonResource', 'lessResource', 'otherResource']);
 
   gulp.task('cpResource', ['cpSrcResource']);
 

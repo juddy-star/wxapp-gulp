@@ -82,23 +82,29 @@ const run = () => {
       .pipe(gulp.dest('dist'));
   });
 
-  gulp.task('watchLess', () => {
+  gulp.task('watchWxss', () => {
+    return gulp.src(generateSrc('src/**/*.wxss'))
+      .pipe(plumber({
+        errorHandler: notify.onError('Error: <%= error.message %>')
+      }))
+      .pipe(cached())
+      .pipe(gulp.dest('dist'));
+  }); 
+
+  gulp.task('watchLess', ['watchWxss'], () => {
     return gulp.src(generateSrc('src/**/*.less'))
       .pipe(plumber({
         errorHandler: notify.onError('Error: <%= error.message %>')
       }))
-      .pipe(cached('originLess'))
       .pipe(sourcemaps.init())
       .pipe(less())
       .pipe(sourcemaps.write())
-      .pipe(rename((path) => {
-        reExtname(path, '.wxss');
-      }))
+      .pipe(rename((path) => { reExtname(path, '.wxss'); }))
       .pipe(gulp.dest('dist'));
   });
 
   gulp.task('watchOthers', () => {
-    return gulp.src(generateSrc('src/**/*.!(js|less)'))
+    return gulp.src(generateSrc('src/**/*.!(js|less|wxss)'))
       .pipe(plumber({
         errorHandler: notify.onError('Error: <%= error.message %>')
       }))
@@ -117,7 +123,8 @@ const run = () => {
         type,
         path
       } = event;
-      deleteCached(type, path);
+
+      deleteCached(type, path, cached);
       gulpLog(type, path);
     });
   });
